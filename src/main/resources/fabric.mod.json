@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "cosmiccandy",
+  "version": "${version}",
+  "name": "Cosmiccandy",
+  "description": "Update to SpaceCandy by Miclebrick",
+  "authors": [
+    "Sciath"
+  ],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/cosmiccandy/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "cosmiccandy.cosmiccandy.client.CosmiccandyClient"
+    ],
+    "main": [
+      "cosmiccandy.cosmiccandy.Cosmiccandy"
+    ]
+  },
+  "mixins": [
+    "cosmiccandy.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "1.19.*"
+  }
+}
