@@ -13,14 +13,14 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "client.VoidClient"
+      "code.client.VoidClient"
     ],
     "main": [
-      "Cosmiccandy"
+      "code.Void"
     ]
   },
   "mixins": [
-    "void.mixins.json"
+    "voidHE.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",

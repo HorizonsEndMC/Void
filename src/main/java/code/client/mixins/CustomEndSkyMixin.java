@@ -1,4 +1,4 @@
-package client.mixins;
+package code.client.mixins;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.render.BufferBuilder;
