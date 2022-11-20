@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "cosmiccandy",
+  "id": "void",
   "version": "${version}",
-  "name": "Cosmiccandy",
-  "description": "Update to SpaceCandy by Miclebrick",
+  "name": "Void",
+  "description": "Horizons-End SkyBox: Will be added onto more soon",
   "authors": [
     "Sciath"
   ],
   "contact": {},
   "license": "LGPL-3.0",
-  "icon": "assets/cosmiccandy/icon.png",
+  "icon": "assets/void/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "cosmiccandy.cosmiccandy.client.CosmiccandyClient"
+      "client.VoidClient"
     ],
     "main": [
-      "cosmiccandy.cosmiccandy.Cosmiccandy"
+      "Cosmiccandy"
     ]
   },
   "mixins": [
-    "cosmiccandy.mixins.json"
+    "void.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",
