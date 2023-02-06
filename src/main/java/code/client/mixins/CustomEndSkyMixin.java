@@ -9,8 +9,8 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 @Mixin({WorldRenderer.class})
@@ -26,7 +26,7 @@ public class CustomEndSkyMixin {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.depthMask(false);
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderTexture(0, CUSTOM_END_SKY);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
@@ -36,23 +36,23 @@ public class CustomEndSkyMixin {
             if (i == 0)
                 points = new float[] { 0.33333334F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5F, 0.33333334F, 0.5F };
             if (i == 1) {
-                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
+                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
                 points = new float[] { 0.6666667F, 0.5F, 0.6666667F, 1.0F, 1.0F, 1.0F, 1.0F, 0.5F };
             }
             if (i == 2) {
-                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
                 points = new float[] { 0.33333334F, 1.0F, 0.33333334F, 0.5F, 0.0F, 0.5F, 0.0F, 1.0F };
             }
             if (i == 3) {
-                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0f));
                 points = new float[] { 0.33333334F, 0.5F, 0.6666667F, 0.5F, 0.6666667F, 0.0F, 0.33333334F, 0.0F };
             }
             if (i == 4) {
-                matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
+                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
                 points = new float[] { 0.6666667F, 0.5F, 1.0F, 0.5F, 1.0F, 0.0F, 0.6666667F, 0.0F };
             }
             if (i == 5) {
-                matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
+                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
                 points = new float[] { 0.6666667F, 0.5F, 0.33333334F, 0.5F, 0.33333334F, 1.0F, 0.6666667F, 1.0F };
             }
             Matrix4f matrix4f = matrices.peek().getPositionMatrix();
