@@ -21,7 +21,7 @@ import code.Void;
 
 @Mixin({ WorldRenderer.class })
 public class CustomEndSkyMixin {
-    private static final Identifier CUSTOM_END_SKY = Void.id("textures/environment/nebula_skybox.png");
+    private static final Identifier CUSTOM_END_SKY = Void.id("textures/environment/nebula_skybox_red.png");
 
     /**
      * @author
