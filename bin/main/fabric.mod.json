@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "void",
+  "version": "${version}",
+  "name": "Void",
+  "description": "Horizons-End SkyBox: Will be added onto more soon",
+  "authors": [
+    "Sciath",
+    "IrkedCow"
+  ],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/void/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "code.client.VoidClient"
+    ],
+    "main": [
+      "code.Void"
+    ]
+  },
+  "mixins": [
+    "voidHE.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "1.19.3"
+  }
+}

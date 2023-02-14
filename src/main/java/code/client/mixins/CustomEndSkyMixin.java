@@ -1,6 +1,8 @@
 package code.client.mixins;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+
+import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
@@ -10,20 +12,30 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
+
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-@Mixin({WorldRenderer.class})
+
+import code.Void;
+
+@Mixin({ WorldRenderer.class })
 public class CustomEndSkyMixin {
-    private static final Identifier CUSTOM_END_SKY = new Identifier("textures/environment/custom_end_sky.png");
+    private static final Identifier CUSTOM_END_SKY = Void.id("textures/environment/nebula_skybox.png");
 
     /**
      * @author
      * @reason
      */
+
     @Overwrite
     private void renderEndSky(MatrixStack matrices) {
+        if (matrices == null) {
+            return;
+        }
+    try {
         RenderSystem.enableBlend();
+        BackgroundRenderer.clearFog();
         RenderSystem.defaultBlendFunc();
         RenderSystem.depthMask(false);
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
@@ -57,15 +69,24 @@ public class CustomEndSkyMixin {
             }
             Matrix4f matrix4f = matrices.peek().getPositionMatrix();
             bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(points[0], points[1]).color(255, 255, 255, 255).next();
-            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(points[2], points[3]).color(255, 255, 255, 255).next();
-            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(points[4], points[5]).color(255, 255, 255, 255).next();
-            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(points[6], points[7]).color(255, 255, 255, 255).next();
+            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(points[0], points[1])
+                    .color(255, 255, 255, 255).next();
+            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(points[2], points[3])
+                    .color(255, 255, 255, 255).next();
+            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(points[4], points[5])
+                    .color(255, 255, 255, 255).next();
+            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(points[6], points[7])
+                    .color(255, 255, 255, 255).next();
             tessellator.draw();
             matrices.pop();
         }
-        RenderSystem.depthMask(true);
+
         RenderSystem.enableTexture();
-        RenderSystem.disableBlend();
+        RenderSystem.depthMask(true);
+        RenderSystem.defaultBlendFunc();
+       // RenderSystem.disableBlend();
+    } catch (Throwable throwable) {
+        throwable.printStackTrace();
+    }
     }
 }
