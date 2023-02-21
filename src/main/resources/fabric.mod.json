@@ -3,9 +3,10 @@
   "id": "void",
   "version": "${version}",
   "name": "Void",
-  "description": "Horizons-End SkyBox: Will be added onto more soon",
+  "description": "Optional client mod for Horizon's End",
   "authors": [
-    "Sciath"
+    "Sciath",
+    "trainb0y"
   ],
   "contact": {},
   "license": "LGPL-3.0",
@@ -15,21 +16,24 @@
     "client": [
       {
         "adapter": "kotlin",
-        "value": "code.VoidClient"
+        "value": "net.horizonsend.client.Void"
       }
-    ],
-    "main": [
-      "code.Void"
     ],
     "rei_client": [
       {
         "adapter": "kotlin",
-        "value": "code.integrations.ReiIntegration"
+        "value": "net.horizonsend.client.integrations.ReiIntegration"
+      }
+    ],
+    "modmenu": [
+      {
+        "adapter": "kotlin",
+        "value": "net.horizonsend.client.integrations.ModMenuIntegration"
       }
     ]
   },
   "mixins": [
-    "voidHE.mixins.json"
+    "void.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",
