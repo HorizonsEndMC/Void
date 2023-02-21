@@ -13,10 +13,19 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "code.client.VoidClient"
+      {
+        "adapter": "kotlin",
+        "value": "code.VoidClient"
+      }
     ],
     "main": [
       "code.Void"
+    ],
+    "rei_client": [
+      {
+        "adapter": "kotlin",
+        "value": "code.integrations.ReiIntegration"
+      }
     ]
   },
   "mixins": [

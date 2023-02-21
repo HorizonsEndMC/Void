@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "code.client.mixins",
+  "package": "code.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CustomEndSkyMixin"

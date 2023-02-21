@@ -1,9 +1,7 @@
-package code;
+package code
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ModInitializer
 
-public class Void implements ModInitializer {
-    @Override
-    public void onInitialize() {
-    }
+class Void : ModInitializer {
+    override fun onInitialize() {}
 }
