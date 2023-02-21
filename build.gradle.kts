@@ -8,23 +8,18 @@ group = property("maven_group")!!
 version = property("mod_version")!!
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
-	maven(uri("https://maven.terraformersmc.com/")) // modmenu
-	maven(uri("https://maven.gegy.dev"))
-	maven(uri("https://maven.isxander.dev/releases"))  // yacl
-	maven(uri("https://maven.shedaniel.me")) // REI
-	maven(uri("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1"))
 	mavenCentral()
+
+	maven("https://maven.terraformersmc.com/") // modmenu
+	maven("https://maven.gegy.dev")
+	maven("https://maven.isxander.dev/releases")  // yacl
+	maven("https://maven.shedaniel.me") // REI
+	maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
 }
 
 dependencies {
 	minecraft("com.mojang:minecraft:${property("minecraft_version")}")
 	mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
-
 
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
@@ -58,8 +53,5 @@ tasks {
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 }

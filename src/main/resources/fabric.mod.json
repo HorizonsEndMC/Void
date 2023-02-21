@@ -22,13 +22,13 @@
     "rei_client": [
       {
         "adapter": "kotlin",
-        "value": "net.horizonsend.client.integrations.ReiIntegration"
+        "value": "net.horizonsend.client.features.ReiIntegration"
       }
     ],
     "modmenu": [
       {
         "adapter": "kotlin",
-        "value": "net.horizonsend.client.integrations.ModMenuIntegration"
+        "value": "net.horizonsend.client.features.ModMenuIntegration"
       }
     ]
   },
