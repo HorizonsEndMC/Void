@@ -11,11 +11,10 @@ class ReiIntegration: REIClientPlugin {
     companion object {
         val items = mutableListOf<ItemStack>()
         fun handle(buf: PacketByteBuf) {
-            println("adding")
+            println("loading REI integration")
             items.clear()
 
             for (i in 1..buf.readInt()) {
-                println("adding $items")
                 items.add(buf.readItemStack())
             }
 

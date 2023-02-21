@@ -15,11 +15,10 @@ import net.minecraft.util.Identifier
 @Environment(EnvType.CLIENT)
 class VoidClient : ClientModInitializer {
     override fun onInitializeClient() {
-        println("init")
         val reiExists = FabricLoader.getInstance().isModLoaded("roughlyenoughitems")
 
         ClientPlayNetworking.registerGlobalReceiver(id("register")) { _: MinecraftClient, _: ClientPlayNetworkHandler, buf: PacketByteBuf, _: PacketSender ->
-            println("got msg")
+            println("received handshake")
             if (reiExists)
                 ReiIntegration.handle(buf)
         }
