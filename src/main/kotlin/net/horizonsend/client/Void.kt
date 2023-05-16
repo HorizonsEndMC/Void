@@ -12,24 +12,28 @@ import net.horizonsend.client.networking.Packets
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.util.Identifier
 import kotlin.properties.Delegates
+
+val mc get() = MinecraftClient.getInstance()
 
 @Environment(EnvType.CLIENT)
 @Suppress("Unused")
 object Void : ClientModInitializer {
-	var reiExists by Delegates.notNull<Boolean>()
+    var reiExists by Delegates.notNull<Boolean>()
 
-	override fun onInitializeClient() {
-		reiExists = FabricLoader.getInstance().isModLoaded("roughlyenoughitems")
+    override fun onInitializeClient() {
+        reiExists = FabricLoader.getInstance().isModLoaded("roughlyenoughitems")
 
-		for (packet in Packets.values().filterNot { it.s2c == null }) {
-			println("Registering packet ${packet.id}.")
-			ClientPlayNetworking.registerGlobalReceiver(packet.id) { minecraftClient: MinecraftClient, clientPlayNetworkHandler: ClientPlayNetworkHandler, packetByteBuf: PacketByteBuf, packetSender: PacketSender ->
-				println("Received ${packet.id}")
-				packet.s2c!!.receive(minecraftClient, clientPlayNetworkHandler, packetByteBuf, packetSender)
-			}
-		}
+        for (packet in Packets.values()) {
+            println("Registering packet ${packet.handler.id}.")
+            ClientPlayNetworking.registerGlobalReceiver(packet.handler.id) { m: MinecraftClient, c: ClientPlayNetworkHandler, p: PacketByteBuf, ps: PacketSender ->
+                packet.handler.s2c(m, c, p, ps)
+            }
+        }
 
-		DISCONNECT.register { _, _ -> ReiIntegration.items.clear() }
-	}
+        DISCONNECT.register { _, _ -> ReiIntegration.items.clear() }
+    }
 }
+
+fun id(s: String) = Identifier("ion", s)

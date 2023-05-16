@@ -1,7 +1,7 @@
 plugins {
 	id("fabric-loom")
 	java
-	kotlin("jvm") version "1.8.10"
+	kotlin("jvm") version "1.8.21"
 }
 
 group = property("maven_group")!!
@@ -27,10 +27,10 @@ dependencies {
 	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 
-	modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:10.0.592")
+	modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("rei_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:1.9.1+kotlin.1.8.10")
 
-	modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:10.0.592")
+	modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("rei_version")}")
 	modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.1.0")
 }
 

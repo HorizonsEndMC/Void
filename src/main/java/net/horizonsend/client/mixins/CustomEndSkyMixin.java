@@ -18,6 +18,10 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class CustomEndSkyMixin {
 	private static final Identifier CUSTOM_END_SKY = new Identifier("textures/environment/custom_end_sky.png");
 
+	/**
+	 * @author Sciath
+	 * @reason cutie skybox
+	 */
 	@Overwrite
 	private void renderEndSky(MatrixStack matrices) {
 		RenderSystem.enableBlend();
@@ -62,7 +66,6 @@ public class CustomEndSkyMixin {
 			matrices.pop();
 		}
 		RenderSystem.depthMask(true);
-		RenderSystem.enableTexture();
 		RenderSystem.disableBlend();
 	}
 }
