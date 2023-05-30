@@ -1,5 +1,6 @@
 package net.horizonsend.client
 
+import me.x150.renderer.font.FontRenderer
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -7,13 +8,17 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.D
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.fabricmc.loader.api.FabricLoader
+import net.horizonsend.client.features.CratePlacer
 import net.horizonsend.client.features.ReiIntegration
+import net.horizonsend.client.features.ShipStatusDisplay
 import net.horizonsend.client.networking.Packets
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
+import java.awt.Font
 import kotlin.properties.Delegates
+
 
 val mc get() = MinecraftClient.getInstance()
 
@@ -21,8 +26,8 @@ val mc get() = MinecraftClient.getInstance()
 @Suppress("Unused")
 object Void : ClientModInitializer {
     var reiExists by Delegates.notNull<Boolean>()
-
     override fun onInitializeClient() {
+        CratePlacer.init()
         reiExists = FabricLoader.getInstance().isModLoaded("roughlyenoughitems")
 
         for (packet in Packets.values()) {
@@ -32,6 +37,7 @@ object Void : ClientModInitializer {
             }
         }
 
+        ShipStatusDisplay.init()
         DISCONNECT.register { _, _ -> ReiIntegration.items.clear() }
     }
 }

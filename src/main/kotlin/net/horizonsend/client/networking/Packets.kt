@@ -7,6 +7,7 @@ import net.horizonsend.client.id
 import net.horizonsend.client.networking.packets.HandshakePacket
 import net.horizonsend.client.networking.packets.PlayerAdd
 import net.horizonsend.client.networking.packets.PlayerRemove
+import net.horizonsend.client.networking.packets.ShipData
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.network.PacketByteBuf
@@ -31,6 +32,7 @@ enum class Packets(
 ) {
     HANDSHAKE(HandshakePacket),
     PLAYER_ADD(PlayerAdd),
+    SHIP_DATA(ShipData.ShipDataPacket),
     PLAYER_REMOVE(PlayerRemove);
 
     fun send() {

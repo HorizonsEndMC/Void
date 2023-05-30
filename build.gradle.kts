@@ -12,6 +12,7 @@ repositories {
 
 	maven("https://maven.terraformersmc.com/") // modmenu
 	maven("https://maven.gegy.dev")
+	maven("https://jitpack.io")
 	maven("https://maven.isxander.dev/releases")  // yacl
 	maven("https://maven.shedaniel.me") // REI
 	maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
@@ -29,6 +30,8 @@ dependencies {
 
 	modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("rei_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:1.9.1+kotlin.1.8.10")
+
+	include(modImplementation("com.github.0x3C50:Renderer:master-SNAPSHOT")!!)
 
 	modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${property("rei_version")}")
 	modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.1.0")
