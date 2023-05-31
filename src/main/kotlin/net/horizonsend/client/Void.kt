@@ -1,6 +1,5 @@
 package net.horizonsend.client
 
-import me.x150.renderer.font.FontRenderer
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -16,7 +15,6 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
-import java.awt.Font
 import kotlin.properties.Delegates
 
 
@@ -33,6 +31,7 @@ object Void : ClientModInitializer {
         for (packet in Packets.values()) {
             println("Registering packet ${packet.handler.id}.")
             ClientPlayNetworking.registerGlobalReceiver(packet.handler.id) { m: MinecraftClient, c: ClientPlayNetworkHandler, p: PacketByteBuf, ps: PacketSender ->
+                println("Received ${packet.handler.id}")
                 packet.handler.s2c(m, c, p, ps)
             }
         }

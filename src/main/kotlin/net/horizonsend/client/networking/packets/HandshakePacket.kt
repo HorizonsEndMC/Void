@@ -18,7 +18,9 @@ object HandshakePacket : IonPacketHandler() {
         buf: PacketByteBuf,
         responseSender: PacketSender
     ) {
-        Packets.HANDSHAKE.send()
+        MinecraftClient.getInstance().send {
+            Packets.HANDSHAKE.send()
+        }
         if (Void.reiExists) {
             ReiIntegration.items.clear()
 
