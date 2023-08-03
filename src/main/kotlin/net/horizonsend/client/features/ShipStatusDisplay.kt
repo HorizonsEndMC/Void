@@ -4,6 +4,7 @@ import me.x150.renderer.event.RenderEvents
 import me.x150.renderer.render.Renderer2d
 import net.horizonsend.client.networking.packets.ShipData
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.font.TextRenderer
 import java.awt.Color
 
 object ShipStatusDisplay {
@@ -15,6 +16,7 @@ object ShipStatusDisplay {
             val y = 5.0
 
             val renderer = MinecraftClient.getInstance().textRenderer
+            val m4f = it.matrices.peek().positionMatrix
             val data = mutableMapOf<String, Any>(
                 "Gravity Well" to if (ShipData.gravwell) "§aON" else "§cOFF",
                 "Shield Regen Efficiency" to ShipData.regenEfficiency,
@@ -39,27 +41,24 @@ object ShipStatusDisplay {
                 if (longestText < textSize) longestText = textSize
 
                 renderer.draw(
-                    it,
                     s,
-                    x.toFloat(), y.toFloat() + starting,
-                    Color.WHITE.rgb
+                    x.toFloat() + renderer.getWidth(s), y.toFloat() + starting,
+                    Color.WHITE.rgb, true, m4f, it.vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880
                 )
             }
 
             drawText("Name: ")
             renderer.draw(
-                it,
                 ShipData.name,
                 x.toFloat() + renderer.getWidth("Name: "), y.toFloat() + starting,
-                Color.WHITE.rgb
+                Color.WHITE.rgb, true, m4f, it.vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880
             )
 
             drawText("Type: ")
             renderer.draw(
-                it,
                 ShipData.type,
-                x.toFloat() + renderer.getWidth("Name: "), y.toFloat() + starting,
-                Color.WHITE.rgb
+                x.toFloat() + renderer.getWidth("Type: "), y.toFloat() + starting,
+                Color.WHITE.rgb, true, m4f, it.vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880
             )
 
             for ((name, value) in data) {
@@ -82,8 +81,9 @@ object ShipStatusDisplay {
             drawText(" • Thruster: ${(ShipData.thrusterPowerMode / sum * 100.0).toInt()}")
 
             increment()
+
             Renderer2d.renderRoundedOutline(
-                it,
+                it.matrices,
                 chromaColor(),
                 x - 5, y,
                 x + longestText + 5, y + starting + 2,
