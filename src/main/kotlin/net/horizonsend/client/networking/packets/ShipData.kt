@@ -47,6 +47,7 @@ object ShipData {
             buf: PacketByteBuf,
             responseSender: PacketSender
         ) {
+            println("packet gotten!!!!")
             _isPiloting = buf.readBoolean()
             if (!_isPiloting) return
 

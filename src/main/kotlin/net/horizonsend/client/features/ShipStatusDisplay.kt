@@ -11,6 +11,7 @@ object ShipStatusDisplay {
     fun init() {
         RenderEvents.HUD.register {
             if (!ShipData.isPiloting) return@register
+            println("yipee")
 
             val x = 10.0
             val y = 5.0

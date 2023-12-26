@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.fabricmc.loader.api.FabricLoader
 import net.horizonsend.client.features.CratePlacer
-import net.horizonsend.client.features.DCCruiser
 import net.horizonsend.client.features.ReiIntegration
 import net.horizonsend.client.features.ShipStatusDisplay
 import net.horizonsend.client.networking.Packets
