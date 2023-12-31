@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.D
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.fabricmc.loader.api.FabricLoader
-import net.horizonsend.client.features.CratePlacer
 import net.horizonsend.client.features.ReiIntegration
 import net.horizonsend.client.features.ShipStatusDisplay
 import net.horizonsend.client.networking.Packets
@@ -25,7 +24,6 @@ val mc get() = MinecraftClient.getInstance()
 object Void : ClientModInitializer {
     var reiExists by Delegates.notNull<Boolean>()
     override fun onInitializeClient() {
-        CratePlacer.init()
         reiExists = FabricLoader.getInstance().isModLoaded("roughlyenoughitems")
 
         for (packet in Packets.values()) {
