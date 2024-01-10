@@ -1,6 +1,7 @@
 package net.horizonsend.client.mixins;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.horizonsend.client.SkyBoxSystem;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
@@ -14,13 +15,13 @@ import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
+import static net.horizonsend.client.SkyBoxSystemKt.currentSkybox;
+
 @Mixin({WorldRenderer.class})
 public class CustomEndSkyMixin {
-	private static final Identifier CUSTOM_END_SKY = new Identifier("textures/environment/custom_end_sky.png");
-
 	/**
 	 * @author Sciath
-	 * @reason cutie skybox
+	 * @reason skybox
 	 */
 	@Overwrite
 	private void renderEndSky(MatrixStack matrices) {
@@ -28,7 +29,7 @@ public class CustomEndSkyMixin {
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.depthMask(false);
 		RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-		RenderSystem.setShaderTexture(0, CUSTOM_END_SKY);
+		RenderSystem.setShaderTexture(0,  currentSkybox().getIdentifier());
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		float[] points = new float[8];

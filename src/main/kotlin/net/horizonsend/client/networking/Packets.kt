@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.horizonsend.client.id
+import net.horizonsend.client.networking.packets.GetCurrentWorld
 import net.horizonsend.client.networking.packets.HandshakePacket
 import net.horizonsend.client.networking.packets.PlayerAdd
 import net.horizonsend.client.networking.packets.PlayerRemove
@@ -33,7 +34,8 @@ enum class Packets(
     HANDSHAKE(HandshakePacket),
     PLAYER_ADD(PlayerAdd),
     SHIP_DATA(ShipData.ShipDataPacket),
-    PLAYER_REMOVE(PlayerRemove);
+    PLAYER_REMOVE(PlayerRemove),
+    GET_CURRENT_WORLD(GetCurrentWorld.GetCurrentWorld);
 
     fun send() {
         ClientPlayNetworking.send(handler.id, PacketByteBufs.create().apply { handler.c2s(this) })
