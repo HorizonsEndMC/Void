@@ -1,6 +1,5 @@
 package net.horizonsend.client
 
-import dev.architectury.event.events.client.ClientTickEvent
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -10,14 +9,13 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.D
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.fabricmc.loader.api.FabricLoader
+import net.horizonsend.client.features.CratePlacer
 import net.horizonsend.client.features.ReiIntegration
 import net.horizonsend.client.features.ShipStatusDisplay
-import net.horizonsend.client.mixins.CustomEndSkyMixin
 import net.horizonsend.client.networking.Packets
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.client.option.KeyBinding
-import net.minecraft.client.render.WorldRenderer
 import net.minecraft.client.util.InputUtil
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
@@ -30,6 +28,15 @@ val mc get() = MinecraftClient.getInstance()
 @Environment(EnvType.CLIENT)
 @Suppress("Unused")
 object Void : ClientModInitializer {
+    var isCratePlacerActive: Boolean = false
+    val cratePlacer = KeyBindingHelper.registerKeyBinding(
+        KeyBinding(
+            "Activate Crate Placer",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_RIGHT_BRACKET,
+            "Void",
+        )
+    )
     var reiExists by Delegates.notNull<Boolean>()
     override fun onInitializeClient() {
         reiExists = FabricLoader.getInstance().isModLoaded("roughlyenoughitems")
@@ -44,6 +51,16 @@ object Void : ClientModInitializer {
 
         ShipStatusDisplay.init()
         DISCONNECT.register { _, _ -> ReiIntegration.items.clear() }
+        ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient? ->
+            handleKeybinds()
+            CratePlacer.handleCratePlacer()
+        })
+    }
+
+    private fun handleKeybinds() {
+        if (cratePlacer.wasPressed()){
+            isCratePlacerActive = !isCratePlacerActive
+        }
     }
 }
 
