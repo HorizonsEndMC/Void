@@ -43,7 +43,7 @@ object ShipStatusDisplay {
 
                 renderer.draw(
                     s,
-                    x.toFloat() + renderer.getWidth(s), y.toFloat() + starting,
+                    x.toFloat(), y.toFloat() + starting,
                     Color.WHITE.rgb, true, m4f, it.vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, 15728880
                 )
             }
